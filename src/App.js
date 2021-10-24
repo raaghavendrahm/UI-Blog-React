@@ -7,6 +7,9 @@ function App() {
   // Initial state of blogs to display on homepage:
   const [blogs, setBlogs] = useState([]);
 
+  // While data is being fetched, a loading messages must be displayed:
+  const [isLoading, setIsLoading] = useState(true);
+
   /* 
   // Delete Blog
   const handleDelete = (id) => {
@@ -21,13 +24,18 @@ function App() {
 
   // Fetch Blogs
   useEffect(() => {
-    fetch('http://localhost:5000/blogs')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setBlogs(data);
-      });
+    // In this case, data is fetched from local machine. So, it is very fast. But, in actual case, data will be fetched from a server over the internet, which will be having a delay. So, to mimic that, 'setTimeOut' function is used to mimic a delay of one second. Note that it shall not be done in an actual project as it adds another second of delay!!
+
+    setTimeout(() => {
+      fetch('http://localhost:5000/blogs')
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setBlogs(data);
+          setIsLoading(false);
+        });
+    }, 1000);
   }, []);
 
   /*
@@ -47,6 +55,11 @@ function App() {
     <div className="App">
       <Navbar />
       <div className="content">
+        {/* While data is not yet fetched, value of 'isLoading' state will be 'true' and this condition should display 'Loading...' message: */}
+        {isLoading && <div>Loading...</div>}
+
+        {/* Once the data is fetched, the value of 'isLoading' state must be changed to 'false' and that should stop diplaying 'Loading...' message. This is taken care in 'Fetch Blogs' section. */}
+
         <Home blogs={blogs} />
       </div>
     </div>
