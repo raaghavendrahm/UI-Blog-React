@@ -30,6 +30,19 @@ function App() {
       });
   }, []);
 
+  /*
+  // The above can be done using Async/Await as well as follows:
+  
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const res = await fetch('http://localhost:5000/blogs');
+      const data = await res.json();
+      setBlogs(data);
+    };
+    fetchTasks();
+  }); 
+  */
+
   return (
     <div className="App">
       <Navbar />
