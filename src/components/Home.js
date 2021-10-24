@@ -1,9 +1,9 @@
 import BlogList from './BlogList';
 
-const Home = ({ blogs, onDelete }) => {
+const Home = ({ blogs }) => {
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All Blogs" onDelete={onDelete} />
+      <BlogList blogs={blogs} title="All Blogs" />
     </div>
   );
 };
