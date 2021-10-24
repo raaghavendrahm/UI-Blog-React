@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import useFetch from './components/useFetch';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
   /* 
@@ -25,20 +26,25 @@ function App() {
   } = useFetch('http://localhost:5000/blogs');
 
   return (
-    <div className="App">
-      <Navbar />
-      <div className="content">
-        {/* In case of any error while fetching data, error message is displayed: */}
-        {error && <div>{error}</div>}
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          {/* In case of any error while fetching data, error message is displayed: */}
+          {error && <div>{error}</div>}
 
-        {/* While data is not yet fetched, value of 'isLoading' state will be 'true' and this condition should display 'Loading...' message: */}
-        {isLoading && <div>Loading...</div>}
+          {/* While data is not yet fetched, value of 'isLoading' state will be 'true' and this condition should display 'Loading...' message: */}
+          {isLoading && <div>Loading...</div>}
 
-        {/* Once the data is fetched, the value of 'isLoading' state must be changed to 'false' and that should stop diplaying 'Loading...' message. This is taken care in 'Fetch Blogs' section. */}
-
-        <Home blogs={blogs} />
+          {/* Once the data is fetched, the value of 'isLoading' state must be changed to 'false' and that should stop diplaying 'Loading...' message. This is taken care in 'Fetch Blogs' section. */}
+          <Switch>
+            <Route path="/">
+              <Home blogs={blogs} />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
