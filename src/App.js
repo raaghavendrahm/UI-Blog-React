@@ -4,11 +4,7 @@ import { useState } from 'react';
 
 function App() {
   // Initial state of blogs to display on homepage:
-  const [blogs, setBlogs] = useState([
-    { title: 'Blog-1', body: 'This is blog-1', author: 'raaghu', id: 1 },
-    { title: 'Blog-2', body: 'This is blog-2', author: 'raani', id: 2 },
-    { title: 'Blog-3', body: 'This is blog-3', author: 'makku', id: 3 },
-  ]);
+  const [blogs, setBlogs] = useState([]);
 
   // Delete Blog
   const handleDelete = (id) => {
