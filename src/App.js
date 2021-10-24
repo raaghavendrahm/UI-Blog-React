@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import useFetch from './components/useFetch';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Create from './components/Create';
 
 function App() {
   /* 
@@ -38,8 +39,11 @@ function App() {
 
           {/* Once the data is fetched, the value of 'isLoading' state must be changed to 'false' and that should stop diplaying 'Loading...' message. This is taken care in 'Fetch Blogs' section. */}
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <Home blogs={blogs} />
+            </Route>
+            <Route path="/create">
+              <Create />
             </Route>
           </Switch>
         </div>
