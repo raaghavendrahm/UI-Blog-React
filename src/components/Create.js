@@ -8,10 +8,22 @@ const Create = () => {
   const [body, setBody] = useState('');
   const [author, setAuthor] = useState('makku');
 
+  // Handle Submit
+  const handleSubmit = (e) => {
+    // default behaviour of submission is prevented that prevents page refresh, and the form input values are tracked and used to create 'blog' object that is updated to db.json later:
+    e.preventDefault();
+
+    const blog = { title, body, author };
+
+    console.log(blog); // new object created is logged
+  };
+
   return (
     <div className="create">
       <h2>Add a new blog</h2>
-      <form>
+
+      {/* On form submission, handleSubmit function is triggered that creates 'blog' object which is then updated to db.json with POST request: */}
+      <form onSubmit={handleSubmit}>
         <label>Blog Title:</label>
         <input
           type="text"
