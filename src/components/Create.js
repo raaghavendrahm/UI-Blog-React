@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+// To redirect to different routes, useHistory hook is required. This is used to re-direct user from Create to Home once a blog is added:
+import { useHistory } from 'react-router';
+
 const Create = () => {
   // It is important to track user input in the form and use it as a state. User input is tracked with 'value' property in input fields. Change in the input is tracked with 'onChange' property that triggers the setState method for that state in an anonymous function. Later this new blog added will be updated to db.json file.
 
@@ -10,6 +13,10 @@ const Create = () => {
 
   // Initial state for loading (this state is specific for Create component) is set to false as the request is sent after sumbitting the form:
   const [isLoading, setIsLoading] = useState(false);
+
+  // useHistory hook is used to redirect user from Create to Home once a blog is added:
+  const history = useHistory();
+  // useHistory is used to navigate in the browser like back and forward arrows in browser. With 'history.go(-1)' it takes to 1 path backward and 'history.go(1)' takes to 1 path forward w.r.t current path. To take to Home from Create, 'history.push('/')' is used in fetch.
 
   // Handle Submit
   const handleSubmit = (e) => {
@@ -36,6 +43,9 @@ const Create = () => {
 
       // Once the request is completed here, isLoading must be set to 'false':
       setIsLoading(false);
+
+      // Redirecting user from Create to Home from Creat on adding a blog:
+      history.push('/');
     });
   };
 
