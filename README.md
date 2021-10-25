@@ -1,4 +1,4 @@
-Credits: [Shaun](https://github.com/iamshaunjp)
+### Project Credits: [Shaun](https://github.com/iamshaunjp)
 
 # Getting Started with Create React App
 
