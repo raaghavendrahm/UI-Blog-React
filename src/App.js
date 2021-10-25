@@ -3,6 +3,7 @@ import Home from './components/Home';
 import useFetch from './components/useFetch';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './components/Create';
+import BlogDetails from './components/BlogDetails';
 
 function App() {
   /* 
@@ -42,8 +43,15 @@ function App() {
             <Route exact path="/">
               <Home blogs={blogs} />
             </Route>
+
             <Route path="/create">
               <Create />
+            </Route>
+
+            {/* Sometimes its needed to pass dynamic values as part of path of route (a route with a certain changeable part). But, regardless of changeable part, it still renders the same component. For example, whether it displays blog with id of 1 in 'blogs/1' or blog with id of 2 as 'blogs/2', it renders the same component of 'BlogDetails' but with different data of that blog. This changeable part of the route (1 or 2 in this case) are called 'Route Parameters (variable inside a route). In our react app we need to be able to use route parameters, and access those route parameters from our component. For example, in the component we can use these ids to fetch data for that particular blog. First, BlogDetails component to be created, and create a route for it below:*/}
+            <Route path="/blogs/:id">
+              {/* ':' represents a dynamic value. This should take to the details of the blog with that id. But it renders the same component. For ex, right now, if the path is ../blogs/1 or ../blogs/346 it renders BlogDetails component. But, to grab the specific id in the path, and render the corresponding blog (instead of showing the same), useParams hook is used in BlogDetails component. */}
+              <BlogDetails />
             </Route>
           </Switch>
         </div>
