@@ -4,6 +4,7 @@ import useFetch from './components/useFetch';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Create from './components/Create';
 import BlogDetails from './components/BlogDetails';
+import NotFound from './components/NotFound';
 
 function App() {
   /* 
@@ -52,6 +53,11 @@ function App() {
             <Route path="/blogs/:id">
               {/* ':' represents a dynamic value. This should take to the details of the blog with that id. But it renders the same component. For ex, right now, if the path is ../blogs/1 or ../blogs/346 it renders BlogDetails component. But, to grab the specific id in the path, and render the corresponding blog (instead of showing the same), useParams hook is used in BlogDetails component. */}
               <BlogDetails />
+            </Route>
+
+            {/* If none of the above route paths are matching, NotFound component is rendered. For this, the path will be '*'. */}
+            <Route path="*">
+              <NotFound />
             </Route>
           </Switch>
         </div>
