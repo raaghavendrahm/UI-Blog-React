@@ -17,10 +17,15 @@ const useFetch = (url) => {
   useEffect(() => {
     // In this case, data is fetched from local machine. So, it is very fast. But, in actual case, data will be fetched from a server over the internet, which will be having a delay. So, to mimic that, 'setTimeOut' function is used to mimic a delay of one second. Note that it shall not be done in an actual project as it adds another second of delay!!
 
+    // When switched between Home and Create pages quickly (note that this problem may occur or may not), an error occurs which says "cannot perform a react state update on an unmounted component". This means, by the time useFetch has gathered the data, view is shifted to Create from Home. This error is handled by using "AbortController" by pausing (aborting) the fetch:
+
+    const abortCont = new AbortController();
+
     setTimeout(() => {
       // To make useFetch hook generalized, instead of hard-coding the url, it is made dynamic as 'url'. Also, 'url' is used as dependency array for useEffect as it need to fetch data with change in the url.
 
-      fetch(url)
+      // AbortController is used as a second argument to fetch:
+      fetch(url, { signal: abortCont.signal })
         // Note that, for simulating errors 'blogs' is changed to anything else like 'blogss' in the fetch url above.
 
         .then((res) => {
@@ -40,13 +45,22 @@ const useFetch = (url) => {
           setError(null);
         })
         .catch((err) => {
-          // In case of an error, loading msg is not to be displayed:
-          setIsLoading(false);
+          // When fetch is aborted, fetch throws an error. This is a specific type of error (AbortError) caused by us. But, after catching this error setIsLoading and setError states are updated below (as done for any other error). But, for this error, these states should not be updated. This is done by using if-else statement:
 
-          // Value of message to be set to 'error' state:
-          setError(err.message);
+          if (err.name === 'AbortError') {
+            console.log('fetch aborted');
+          } else {
+            // In case of an error, loading msg is not to be displayed:
+            setIsLoading(false);
+
+            // Value of message to be set to 'error' state:
+            setError(err.message);
+          }
         });
     }, 1000);
+
+    // Abort is used here as cleanup function:
+    return () => abortCont.abort();
   }, [url]);
 
   // useFetch returns data, isLoading, and error states as an object:
