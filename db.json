@@ -6,9 +6,29 @@
       "author": "raaghu",
       "id": 1
     },
-
-    { "title": "Blog-2", "body": "This is blog-2", "author": "raani", "id": 2 },
-
-    { "title": "Blog-3", "body": "This is blog-3", "author": "makku", "id": 3 }
+    {
+      "title": "Blog-2",
+      "body": "This is blog-2",
+      "author": "raani",
+      "id": 2
+    },
+    {
+      "title": "Blog-3",
+      "body": "This is blog-3",
+      "author": "makku",
+      "id": 3
+    },
+    {
+      "title": "Test Title 1",
+      "body": "Test Body 1",
+      "author": "makku",
+      "id": 4
+    },
+    {
+      "title": "Test Title 2",
+      "body": "Test Body 2",
+      "author": "raani",
+      "id": 5
+    }
   ]
 }
